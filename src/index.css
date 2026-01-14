@@ -40,3 +40,22 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+/* Animación para la línea de escaneo */
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-scan {
+  animation: scan 2s ease-in-out infinite;
+}
