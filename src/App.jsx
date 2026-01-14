@@ -36,29 +36,24 @@ function App() {
   ]
 
   return (
-    <div className="flex flex-col h-screen relative overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="fixed inset-0 gradient-mesh -z-10" />
-      <div className="fixed inset-0 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 -z-10" />
-      
-      {/* Header with glassmorphism */}
-      <header className="glass-dark shadow-lg relative z-10">
+    <div className="flex flex-col h-screen bg-[rgb(var(--md-sys-color-background))]">
+      {/* Material Top App Bar */}
+      <header className="bg-[rgb(var(--md-sys-color-primary))] text-[rgb(var(--md-sys-color-on-primary))] elevation-2 sticky top-0 z-10">
         <div className="px-4 py-4">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Inventario Almacén
-          </h1>
-          <p className="text-xs text-gray-600 mt-0.5 font-medium">Gestión en tiempo real</p>
+          <h1 className="text-xl font-medium tracking-wide">Inventario Almacén</h1>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto pb-24 relative z-0">
-        {renderView()}
+      <main className="flex-1 overflow-y-auto pb-20">
+        <div className="max-w-screen-lg mx-auto">
+          {renderView()}
+        </div>
       </main>
 
-      {/* Bottom Navigation with glassmorphism */}
-      <nav className="fixed bottom-0 left-0 right-0 glass-dark border-t border-white/40 shadow-2xl z-20">
-        <div className="flex items-center justify-around px-2 py-1">
+      {/* Material Bottom Navigation Bar */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-[rgb(var(--md-sys-color-surface))] elevation-3 z-20">
+        <div className="flex items-center justify-around max-w-screen-lg mx-auto">
           {navItems.map((item) => {
             const Icon = item.icon
             const isActive = activeView === item.id
@@ -69,13 +64,12 @@ function App() {
                 <button
                   key={item.id}
                   onClick={() => setActiveView(item.id)}
-                  className="relative flex flex-col items-center justify-center p-2 -mt-10 group"
+                  className="relative flex flex-col items-center justify-center p-2 -mt-8 ripple-effect"
                 >
-                  <div className="gradient-primary rounded-full p-5 shadow-2xl hover:shadow-indigo-500/50 transition-all duration-300 transform hover:scale-110 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                    <Icon className="w-7 h-7 text-white relative z-10" />
+                  <div className="bg-[rgb(var(--md-sys-color-primary-container))] rounded-2xl p-4 elevation-3 hover:elevation-4 transition-all duration-200">
+                    <Icon className="w-8 h-8 text-[rgb(var(--md-sys-color-on-primary-container))]" />
                   </div>
-                  <span className="text-xs mt-2 font-semibold text-transparent bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
+                  <span className="text-xs mt-2 font-medium text-[rgb(var(--md-sys-color-on-surface))]">
                     {item.label}
                   </span>
                 </button>
@@ -86,40 +80,29 @@ function App() {
               <button
                 key={item.id}
                 onClick={() => setActiveView(item.id)}
-                className={`flex flex-col items-center justify-center p-3 transition-all duration-200 rounded-xl ${
+                className={`flex flex-col items-center justify-center py-3 px-4 min-w-[64px] transition-all duration-200 ripple-effect rounded-xl ${
                   isActive 
-                    ? 'text-indigo-600 scale-105' 
-                    : 'text-gray-500 hover:text-gray-700 hover:bg-white/30'
+                    ? 'text-[rgb(var(--md-sys-color-on-surface))]' 
+                    : 'text-[rgb(var(--md-sys-color-on-surface-variant))]'
                 }`}
               >
-                <Icon className={`w-6 h-6 transition-transform duration-200 ${
-                  isActive ? 'animate-pulse-soft' : ''
-                }`} />
+                <div className={`transition-all duration-200 rounded-full p-1 ${
+                  isActive ? 'bg-[rgb(var(--md-sys-color-secondary-container))]' : ''
+                }`}>
+                  <Icon className="w-6 h-6" />
+                </div>
                 <span className={`text-xs mt-1 font-medium ${
-                  isActive ? 'font-semibold' : ''
+                  isActive ? 'opacity-100' : 'opacity-70'
                 }`}>
                   {item.label}
                 </span>
-                {isActive && (
-                  <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full" />
-                )}
               </button>
             )
           })}
         </div>
       </nav>
 
-      <Toaster 
-        position="top-center" 
-        richColors 
-        toastOptions={{
-          style: {
-            background: 'rgba(255, 255, 255, 0.9)',
-            backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-          },
-        }}
-      />
+      <Toaster position="top-center" richColors />
     </div>
   )
 }
