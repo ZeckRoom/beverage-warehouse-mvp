@@ -3,151 +3,83 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* Material Design 3 Colors */
-    --md-sys-color-primary: 26 115 232;
-    --md-sys-color-on-primary: 255 255 255;
-    --md-sys-color-primary-container: 210 227 252;
-    --md-sys-color-on-primary-container: 0 29 53;
-    
-    --md-sys-color-secondary: 98 91 113;
-    --md-sys-color-on-secondary: 255 255 255;
-    --md-sys-color-secondary-container: 232 222 248;
-    --md-sys-color-on-secondary-container: 30 25 43;
-    
-    --md-sys-color-tertiary: 125 82 96;
-    --md-sys-color-on-tertiary: 255 255 255;
-    
-    --md-sys-color-error: 179 38 30;
-    --md-sys-color-on-error: 255 255 255;
-    --md-sys-color-error-container: 249 222 220;
-    --md-sys-color-on-error-container: 65 14 11;
-    
-    --md-sys-color-surface: 255 255 255;
-    --md-sys-color-on-surface: 26 28 30;
-    --md-sys-color-surface-variant: 224 226 236;
-    --md-sys-color-on-surface-variant: 68 71 78;
-    
-    --md-sys-color-outline: 116 119 127;
-    --md-sys-color-outline-variant: 196 199 207;
-    
-    --md-sys-color-background: 249 249 249;
-    --md-sys-color-on-background: 26 28 30;
-    
-    --md-sys-color-success: 30 142 62;
-    --md-sys-color-on-success: 255 255 255;
-    
-    --md-sys-color-warning: 245 124 0;
-    --md-sys-color-on-warning: 255 255 255;
-  }
-}
-
-@layer base {
   * {
-    @apply border-gray-300;
+    @apply border-gray-200;
   }
   
   body {
-    @apply bg-[rgb(var(--md-sys-color-background))] text-[rgb(var(--md-sys-color-on-background))];
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    @apply bg-surface-container text-gray-900;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Material Typography */
+  h1 {
+    @apply text-2xl font-normal;
+  }
+  
+  h2 {
+    @apply text-xl font-medium;
+  }
+  
+  h3 {
+    @apply text-lg font-medium;
   }
 }
 
 @layer components {
-  /* Material Design Elevation Shadows */
-  .elevation-0 {
-    box-shadow: none;
+  /* Material Elevated Button */
+  .btn-material {
+    @apply px-6 py-3 rounded-material font-medium shadow-material-2 transition-all duration-200;
+    @apply hover:shadow-material-3 active:shadow-material-1;
   }
   
-  .elevation-1 {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
-  }
-  
-  .elevation-2 {
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
-  }
-  
-  .elevation-3 {
-    box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
-  
-  .elevation-4 {
-    box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
-  }
-  
-  .elevation-5 {
-    box-shadow: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Material Button */
-  .md-button {
-    @apply font-medium text-sm tracking-wide rounded-full px-6 py-2.5 transition-all duration-200;
-  }
-  
-  .md-button-filled {
-    @apply bg-[rgb(var(--md-sys-color-primary))] text-[rgb(var(--md-sys-color-on-primary))] elevation-1 hover:elevation-2;
-  }
-  
-  .md-button-outlined {
-    @apply border border-[rgb(var(--md-sys-color-outline))] text-[rgb(var(--md-sys-color-primary))] hover:bg-[rgb(var(--md-sys-color-primary-container))];
-  }
-  
-  .md-button-text {
-    @apply text-[rgb(var(--md-sys-color-primary))] hover:bg-[rgb(var(--md-sys-color-primary-container))];
+  /* Material Filled Button */
+  .btn-filled {
+    @apply bg-primary-700 text-white hover:bg-primary-800;
   }
   
   /* Material Card */
-  .md-card {
-    @apply bg-[rgb(var(--md-sys-color-surface))] rounded-xl elevation-1;
-  }
-  
-  /* Material FAB */
-  .md-fab {
-    @apply bg-[rgb(var(--md-sys-color-primary-container))] text-[rgb(var(--md-sys-color-on-primary-container))] rounded-2xl elevation-3 hover:elevation-4 transition-all duration-200;
+  .card-material {
+    @apply bg-white rounded-material-lg shadow-material-1 transition-shadow duration-200;
+    @apply hover:shadow-material-2;
   }
   
   /* Material Input */
-  .md-input {
-    @apply bg-[rgb(var(--md-sys-color-surface-variant))] border-0 rounded-t-lg px-4 py-3 text-[rgb(var(--md-sys-color-on-surface))] focus:outline-none focus:ring-2 focus:ring-[rgb(var(--md-sys-color-primary))] transition-all;
+  .input-material {
+    @apply px-4 py-3 bg-surface-variant rounded-material border-0;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-700;
   }
 }
 
-/* Ripple effect simulation */
+/* Material Ripple Effect */
 @keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 0.6;
-  }
-  100% {
+  to {
     transform: scale(4);
     opacity: 0;
   }
 }
 
-.ripple-effect {
+.ripple {
   position: relative;
   overflow: hidden;
 }
 
-.ripple-effect::after {
+.ripple:after {
   content: '';
   position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  width: 100px;
-  height: 100px;
-  margin-top: -50px;
-  margin-left: -50px;
   top: 50%;
   left: 50%;
-  animation: ripple 0.6s;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
   opacity: 0;
+  border-radius: 100%;
+  transform: scale(1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
 }
 
-.ripple-effect:active::after {
-  animation: ripple 0.6s;
+.ripple:focus:not(:active)::after {
+  animation: ripple 0.6s ease-out;
 }

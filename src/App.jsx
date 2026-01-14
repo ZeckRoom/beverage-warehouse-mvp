@@ -36,24 +36,22 @@ function App() {
   ]
 
   return (
-    <div className="flex flex-col h-screen bg-[rgb(var(--md-sys-color-background))]">
+    <div className="flex flex-col h-screen bg-surface-container">
       {/* Material Top App Bar */}
-      <header className="bg-[rgb(var(--md-sys-color-primary))] text-[rgb(var(--md-sys-color-on-primary))] elevation-2 sticky top-0 z-10">
+      <header className="bg-primary-700 text-white shadow-material-2 sticky top-0 z-10">
         <div className="px-4 py-4">
-          <h1 className="text-xl font-medium tracking-wide">Inventario Almacén</h1>
+          <h1 className="text-xl font-medium">Inventario Almacén</h1>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto pb-20">
-        <div className="max-w-screen-lg mx-auto">
-          {renderView()}
-        </div>
+        {renderView()}
       </main>
 
-      {/* Material Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-[rgb(var(--md-sys-color-surface))] elevation-3 z-20">
-        <div className="flex items-center justify-around max-w-screen-lg mx-auto">
+      {/* Material Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-material-4 z-20">
+        <div className="flex items-center justify-around h-16">
           {navItems.map((item) => {
             const Icon = item.icon
             const isActive = activeView === item.id
@@ -64,12 +62,12 @@ function App() {
                 <button
                   key={item.id}
                   onClick={() => setActiveView(item.id)}
-                  className="relative flex flex-col items-center justify-center p-2 -mt-8 ripple-effect"
+                  className="relative flex flex-col items-center justify-center -mt-8 ripple"
                 >
-                  <div className="bg-[rgb(var(--md-sys-color-primary-container))] rounded-2xl p-4 elevation-3 hover:elevation-4 transition-all duration-200">
-                    <Icon className="w-8 h-8 text-[rgb(var(--md-sys-color-on-primary-container))]" />
+                  <div className="bg-primary-700 rounded-full p-4 shadow-material-4 hover:shadow-material-5 hover:bg-primary-800 transition-all">
+                    <Icon className="w-7 h-7 text-white" />
                   </div>
-                  <span className="text-xs mt-2 font-medium text-[rgb(var(--md-sys-color-on-surface))]">
+                  <span className="text-xs mt-2 font-medium text-gray-700">
                     {item.label}
                   </span>
                 </button>
@@ -80,22 +78,15 @@ function App() {
               <button
                 key={item.id}
                 onClick={() => setActiveView(item.id)}
-                className={`flex flex-col items-center justify-center py-3 px-4 min-w-[64px] transition-all duration-200 ripple-effect rounded-xl ${
-                  isActive 
-                    ? 'text-[rgb(var(--md-sys-color-on-surface))]' 
-                    : 'text-[rgb(var(--md-sys-color-on-surface-variant))]'
+                className={`flex flex-col items-center justify-center py-2 px-3 transition-all ripple rounded-material ${
+                  isActive ? 'text-primary-700' : 'text-gray-600 hover:text-primary-700'
                 }`}
               >
-                <div className={`transition-all duration-200 rounded-full p-1 ${
-                  isActive ? 'bg-[rgb(var(--md-sys-color-secondary-container))]' : ''
-                }`}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <span className={`text-xs mt-1 font-medium ${
-                  isActive ? 'opacity-100' : 'opacity-70'
-                }`}>
-                  {item.label}
-                </span>
+                <Icon className="w-6 h-6" />
+                <span className="text-xs mt-1">{item.label}</span>
+                {isActive && (
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-primary-700 rounded-t-full"></div>
+                )}
               </button>
             )
           })}
