@@ -1,34 +1,63 @@
 # 🍺 Beverage Warehouse MVP
 
-Webapp de gestión de inventario para almacén de bebidas con funcionalidad de gemelo digital y **escáner de códigos de barras nativo**.
+Webapp de gestión de inventario para almacén de bebidas con funcionalidad de gemelo digital y diseño **Material Design 3**.
+
+![Material Design](https://img.shields.io/badge/Material%20Design%203-1976D2?style=for-the-badge&logo=material-design&logoColor=white)
+![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## 🚀 Características
 
-- **Inventario en tiempo real**: Visualiza todos los productos del almacén
-- **Registro de cambios**: Historial completo de movimientos
-- **📸 Escáner de productos**: Añade/elimina productos escaneando códigos de barras **con la cámara**
-  - Usa la **Barcode Detection API nativa** (sin librerías pesadas)
-  - Soporta EAN-13, EAN-8, UPC, Code-128, QR
-  - Escaneo continuo en tiempo real
-  - Feedback haptic y sonoro
-- **Estadísticas**: Visualiza métricas y análisis del inventario
-- **Ajustes**: Configuración de la aplicación
+- **✨ Material Design 3**: Diseño moderno siguiendo las guías de Google
+- **📦 Inventario en tiempo real**: Visualiza todos los productos del almacén
+- **📜 Registro de cambios**: Historial completo de movimientos
+- **📸 Escáner nativo**: Usa la **Barcode Detection API** del navegador (sin librerías externas)
+- **📊 Estadísticas**: Visualiza métricas y análisis del inventario
+- **⚙️ Ajustes**: Configuración de la aplicación
+- **📱 Mobile-First**: Optimizado para dispositivos móviles
 
-## 📱 Compatibilidad del Escáner
+## 🎨 Diseño Material
 
-✅ **Chrome/Edge en Android** (totalmente funcional)  
-⚠️ **Safari iOS** (usa entrada manual o foto)  
-🔧 **Chrome Desktop** (habilitar flag experimental)
-
-[📖 Ver guía completa del escáner](./SCANNER.md)
+La aplicación implementa Material Design 3 con:
+- **Colores Material**: Paleta de colores oficial de Google
+- **Elevaciones**: Sombras Material (shadow-material-1 a shadow-material-5)
+- **Tipografía Roboto**: Sistema de tipos Material
+- **Componentes Material**: Cards, buttons, inputs con estilos Material
+- **Ripple effects**: Efectos de onda al hacer clic
+- **Bottom Navigation**: Navegación inferior estilo Material
 
 ## 🛠️ Tecnologías
 
 - **Frontend**: React 18 + Vite
-- **UI**: shadcn/ui + Tailwind CSS
+- **UI**: Material Design 3 + Tailwind CSS
 - **Backend**: Firebase (Firestore + Authentication)
 - **Deploy**: Vercel
-- **Scanner**: Barcode Detection API (nativa del navegador)
+- **Scanner**: Barcode Detection API (nativo del navegador)
+- **Icons**: Lucide React
+- **Notifications**: Sonner
+
+## 📸 Escáner de Códigos de Barras
+
+### Barcode Detection API
+La app usa la **Barcode Detection API nativa del navegador**, sin necesidad de librerías de terceros.
+
+**Ventajas:**
+- ✅ Sin dependencias externas
+- ✅ Más rápido y ligero
+- ✅ Menor consumo de batería
+- ✅ Integración directa con la cámara
+
+**Compatibilidad:**
+- ✅ Chrome/Edge Android
+- ✅ Chrome/Edge Desktop (con flag experimental)
+- ⚠️ Safari/iOS (en desarrollo)
+
+**Formatos soportados:**
+- EAN-13, EAN-8
+- UPC-A, UPC-E
+- Code 128, Code 39
+- Y más...
 
 ## 📦 Instalación
 
@@ -56,52 +85,61 @@ npm run dev
 4. Activa Authentication (opcional)
 5. Copia las credenciales a `src/lib/firebase.js`
 
-[📖 Ver guía detallada de despliegue](./DEPLOY.md)
+```javascript
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_AUTH_DOMAIN",
+  projectId: "TU_PROJECT_ID",
+  storageBucket: "TU_STORAGE_BUCKET",
+  messagingSenderId: "TU_MESSAGING_SENDER_ID",
+  appId: "TU_APP_ID"
+};
+```
 
 ## 📱 Deploy en Vercel
 
-```bash
-# Instalar Vercel CLI
-npm i -g vercel
+### Opción 1: Desde la web
+1. Ve a [vercel.com](https://vercel.com)
+2. Conecta tu cuenta de GitHub
+3. Importa el repositorio `beverage-warehouse-mvp`
+4. Deploy automático ✨
 
-# Deploy
+### Opción 2: CLI
+```bash
+npm i -g vercel
+vercel login
 vercel
 ```
-
-O conecta el repositorio directamente desde [vercel.com](https://vercel.com)
 
 ## 🗂️ Estructura del Proyecto
 
 ```
 src/
 ├── components/
-│   ├── ui/              # Componentes shadcn
-│   ├── Inventory.jsx    # Vista de inventario
-│   ├── Changes.jsx      # Historial de cambios
-│   ├── Scanner.jsx      # Escáner de productos 🔥
-│   ├── BarcodeCamera.jsx # Componente de cámara
-│   ├── Stats.jsx        # Estadísticas
-│   └── Settings.jsx     # Ajustes
-├── hooks/
-│   └── useBarcodeDetector.js # Hook para Barcode Detection API
+│   ├── Inventory.jsx    # Vista de inventario con Material Cards
+│   ├── Changes.jsx      # Historial con Material Timeline
+│   ├── Scanner.jsx      # Escáner con Barcode Detection API
+│   ├── Stats.jsx        # Estadísticas con Material Charts
+│   └── Settings.jsx     # Ajustes con Material Switches
 ├── lib/
 │   ├── firebase.js      # Configuración Firebase
-│   └── utils.js         # Utilidades
-├── App.jsx              # Componente principal
-└── main.jsx             # Punto de entrada
+│   └── utils.js         # Utilidades (cn, formatDate)
+├── App.jsx              # App principal con Bottom Navigation
+├── main.jsx             # Punto de entrada
+└── index.css            # Estilos Material Design 3
 ```
 
-## 📝 Modelo de Datos (Firestore)
+## 📊 Modelo de Datos (Firestore)
 
 ### Colección: `products`
 ```javascript
 {
   id: string,
   name: string,
-  barcode: string,           // EAN-13, UPC, etc.
+  barcode: string,
   quantity: number,
   category: string,
-  unit: string,              // 'botella', 'caja', 'paquete'
+  unit: string, // 'botella', 'caja', 'paquete'
   minStock: number,
   lastUpdated: timestamp,
   updatedBy: string
@@ -114,7 +152,7 @@ src/
   id: string,
   productId: string,
   productName: string,
-  type: string,              // 'add' | 'remove' | 'update'
+  type: string, // 'add' | 'remove' | 'update'
   quantity: number,
   previousQuantity: number,
   newQuantity: number,
@@ -123,77 +161,68 @@ src/
 }
 ```
 
-## 📸 Uso del Escáner
+## 🎨 Personalización de Colores Material
 
-### 1️⃣ Con Cámara (Recomendado)
+Modifica los colores en `tailwind.config.js`:
 
-1. Toca el botón central "Escanear"
-2. Haz clic en "Cámara"
-3. Permite el acceso a la cámara
-4. Apunta al código de barras
-5. ¡Se detecta automáticamente!
-
-### 2️⃣ Entrada Manual
-
-1. Escribe el código en el campo de texto
-2. Pulsa Enter o "Buscar"
-
-### 3️⃣ Desde Foto
-
-1. Haz clic en el botón de imagen
-2. Selecciona una foto con código de barras
-
-## 🐞 Troubleshooting
-
-### Escáner no disponible
-- Usa Chrome o Edge en Android
-- En desktop, habilita: `chrome://flags` → "Experimental Web Platform features"
-
-### Error de permisos de cámara
-- Configuración del navegador → Permisos del sitio → Cámara
-
-### Firestore: Permission denied
-- Revisa las reglas de Firestore
-- Para desarrollo: `allow read, write: if true;`
-
-## 🎨 Personalización
-
-Modifica los colores en `src/index.css` cambiando las variables CSS:
-
-```css
-:root {
-  --primary: 221.2 83.2% 53.3%; /* Color principal */
-  --secondary: 210 40% 96.1%;    /* Color secundario */
+```javascript
+colors: {
+  primary: {
+    DEFAULT: '#1976D2', // Cambia el color principal
+    50: '#E3F2FD',
+    // ...
+  },
 }
 ```
 
-## 📚 Documentación Adicional
+O usa las variables CSS en `src/index.css`.
 
-- [📸 SCANNER.md](./SCANNER.md) - Guía completa del escáner
-- [🚀 DEPLOY.md](./DEPLOY.md) - Guía de despliegue paso a paso
+## 📱 Uso del Escáner
 
-## 🚀 Próximos Pasos
+1. Abre la app en un navegador compatible (Chrome Android recomendado)
+2. Ve a la pestaña "Escanear" (botón central)
+3. Haz clic en "Cámara"
+4. Permite el acceso a la cámara
+5. Apunta al código de barras
+6. ¡Detección automática! ✨
 
-- [x] ✅ Escáner de cámara con Barcode Detection API
-- [ ] 🔒 Autenticación de usuarios con Firebase Auth
-- [ ] 📥 PWA con service worker para uso offline
-- [ ] 🔔 Notificaciones push con FCM
-- [ ] 📈 Gráficos de estadísticas
-- [ ] 👥 Sistema de roles (admin/repartidor)
-- [ ] 🔍 Búsqueda avanzada con filtros
-- [ ] 📷 Fotos de productos
-- [ ] 📦 Gestión de categorías
-- [ ] 📊 Exportar datos a Excel/CSV
+**Nota**: Si tu navegador no soporta la API, usa la entrada manual.
 
-## 👏 Contribuir
+## 🔍 Testing del Escáner
 
-Las contribuciones son bienvenidas. Por favor:
+### En Chrome Android:
+```bash
+# Accede desde tu móvil
+https://tu-app.vercel.app
+```
 
-1. Fork el proyecto
-2. Crea una rama (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -m 'Add: nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un Pull Request
+### En Chrome Desktop (experimental):
+1. Ve a `chrome://flags`
+2. Busca "Experimental Web Platform features"
+3. Activa el flag
+4. Reinicia Chrome
+
+## 🚀 Roadmap
+
+- [x] Material Design 3
+- [x] Barcode Detection API
+- [x] Bottom Navigation
+- [x] Firebase Firestore
+- [ ] Firebase Authentication
+- [ ] PWA (Service Worker)
+- [ ] Offline Mode
+- [ ] Push Notifications
+- [ ] Multi-usuario con roles
+- [ ] Exportar a Excel/PDF
+- [ ] Gráficos avanzados
+
+## 📚 Recursos
+
+- [Material Design 3](https://m3.material.io/)
+- [Barcode Detection API](https://developer.mozilla.org/en-US/docs/Web/API/Barcode_Detection_API)
+- [Firebase Docs](https://firebase.google.com/docs)
+- [Vercel Docs](https://vercel.com/docs)
+- [React Docs](https://react.dev/)
 
 ## 📄 Licencia
 
@@ -201,4 +230,4 @@ MIT
 
 ---
 
-**Desarrollado con ❤️ para optimizar la gestión de almacenes de bebidas**
+**Desarrollado con ❤️ usando Material Design 3**
